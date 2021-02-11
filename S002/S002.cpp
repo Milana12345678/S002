@@ -5,24 +5,23 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
     char s[256];
     char t[256];
-    char m1[] = "First string\n";
-    char m2[] = "Second string\n";
+    char m1[] = "Enter first string\n";
+    char m2[] = "Enter second string\n";
     char f[] = "%s";
-    char fgs[] = "1\n";
-    char fls[] = "-1\n";
-    char fes[] = "0\n";
+    char firstmore[] = "1\n";
+    char firstless[] = "-1\n";
+    char equal[] = "0\n";
     _asm {
-        // Печать First string
+        // Печать первой строки
         lea ebx, m1
         push ebx
         lea ecx, f
         push ecx 
         call printf
         add esp, 8
-        // Чтение First string
+        // Чтение первой строки
         lea ebx, s
         push ebx
         lea ecx, f
@@ -30,14 +29,14 @@ int main()
         call scanf
         add esp, 8
 
-        // Печать Second string
+        // Печать второй строки
         lea ebx, m2
         push ebx
         lea ecx, f
         push ecx
         call printf
         add esp, 8
-        // Чтение Second string
+        // Чтение второй строки
         lea ebx, t
         push ebx
         lea ecx, f
@@ -61,7 +60,7 @@ int main()
             je b2 // Обнаружение конца первой строки
 
             cmp dl,0
-            je f3 // Обнаружили конец второй строки - первая больше 
+            je f3 // Найден конец второй строки - первая строка оказалась больше 
             cmp al,dl 
             je b1 // Символы в перой и второй строке равны - продолжаем цикл
 
@@ -74,7 +73,7 @@ int main()
             jmp f4 // Вторая строка больше
   
     f3:  // Первая строка больше
-            lea ebx, fgs 
+            lea ebx, firstmore 
                 push ebx
                 lea ecx, f 
                 push ecx
@@ -82,7 +81,7 @@ int main()
                 add esp, 8
                 jmp end
     f4: // Вторая строка больше
-            lea ebx, fls
+            lea ebx, firstless
                 push ebx
                 lea ecx, f 
                 push ecx
@@ -90,7 +89,7 @@ int main()
                add esp, 8
                 jmp end
     f5 : // Строки равны
-            lea ebx, fes
+            lea ebx, equal
                 push ebx
                 lea ecx, f
                 push ecx
